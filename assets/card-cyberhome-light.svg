@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="580" height="184" viewBox="0 0 580 184" role="img" aria-label="CyberHome: A Cyberpunk 2077-style launcher for Android TV boxes and projectors. Live gauges, D-pad driven, built without Gradle.">
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#eaf6ff"/><stop offset="1" stop-color="#f8fbff"/></linearGradient>
+  <filter id="blur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="40"/></filter>
+  <filter id="glow" x="-20%" y="-60%" width="140%" height="220%">
+    <feGaussianBlur stdDeviation="4" result="g"/><feComponentTransfer in="g" result="g2"><feFuncA type="linear" slope="0.35"/></feComponentTransfer>
+    <feMerge><feMergeNode in="g2"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+  <clipPath id="c"><rect x="1" y="1" width="578" height="182" rx="14"/></clipPath>
+</defs>
+<g clip-path="url(#c)">
+  <rect width="580" height="184" fill="url(#bg)"/>
+  <circle cx="540" cy="20" r="90" fill="#6fb6ff" opacity="0.45" filter="url(#blur)"/>
+  <circle cx="440" cy="184" r="70" fill="#ff8fb2" opacity="0.45" filter="url(#blur)"/>
+</g>
+<rect x="1" y="1" width="578" height="182" rx="14" fill="#ffffff" fill-opacity="0.55" stroke="#0b6e99" stroke-opacity="0.18"/>
+<text x="28" y="50" font-family="-apple-system, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-weight="700" font-size="24" fill="#0b2236" filter="url(#glow)">📺 CyberHome</text>
+<text x="552" y="48" text-anchor="end" font-family="ui-monospace, 'SF Mono', 'JetBrains Mono', 'Cascadia Code', Menlo, Consolas, monospace" font-size="13" fill="#0090c0">android tv</text>
+<text x="28" y="86" font-family="-apple-system, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="15" fill="#4a6a80">A Cyberpunk 2077-style launcher for Android TV boxes and</text><text x="28" y="108" font-family="-apple-system, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="15" fill="#4a6a80">projectors. Live gauges, D-pad driven, built without</text><text x="28" y="130" font-family="-apple-system, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="15" fill="#4a6a80">Gradle.</text>
+<circle cx="34" cy="157" r="6" fill="#b07219"/><text x="46" y="162" font-family="-apple-system, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13" fill="#4a6a80">Java</text>
+</svg>
