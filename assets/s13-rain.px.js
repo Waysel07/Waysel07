@@ -169,7 +169,7 @@ anim("rain", { w: W, h: H, frames: FR, fps: 12 },
     for (const [sx, sy, t] of splash) { const p = (c.frame - t + FR) % FR
       if (p === 0) c.px(sx, sy, "x"); if (p === 1) { c.px(sx - 1, sy, "x"); c.px(sx + 1, sy, "x") } }
   },
-  stamp("_title", 62, 6),
-  stamp("_sub", 28, 34),
-  stamp("_label", 72, 108),
+  stamp("_title", 67, 6),
+  stamp("_sub", 29, 34),
+  stamp("_label", 73, 108),
 )
