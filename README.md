@@ -1,4 +1,4 @@
-<img alt="Waysel: cars, music and small odd projects. A pixel city at night scrolls past under the moon." src="assets/city-night.gif" width="100%">
+<img alt="Waysel: cars, music and small odd projects. A slammed silver Nissan Silvia S13 parked on a wet road in a misty pine forest, in the rain." src="assets/s13-rain.gif" width="100%">
 
 Hi, I'm Waysel from Germany 🇩🇪. I'm into 🚗 cars and 🎧 music, and I make small, odd things.
 
