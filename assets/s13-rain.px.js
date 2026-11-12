@@ -1,5 +1,54 @@
-// Waysel profile header: a slammed S13 parked on a wet road in a misty pine forest, in the rain.
-// Built with pxl.
+// Waysel profile header: a slammed two-tone S13 parked on a wet road in a misty pine forest, in the rain.
+pal({
+  k: "#0b0d11", L: "#e8ecf2", B: "#b9c1ce", S: "#8b94a6", M: "#636b7d", D: "#2e3139", d: "#1e2027",
+  v: "#121519", V: "#3a414f", I: "#a3a9b4", C: "#dde1e8", G: "#363840", O: "#202228", H: "#60636c",
+  h: "#f2f4f6", A: "#ef8a2b", E: "#f2f3ee", e: "#4f8a5e", t: "#c8343c",
+})
+function wheel(c, x, y, tilt) {
+  const ring = (r, k) => { for (let dy = -r; dy <= r; dy++) for (let dx = -r; dx <= r; dx++) {
+    const d = dx * dx + dy * dy; if (d <= r * r + r) c.px(x + dx + (tilt && dy < -2 ? -1 : 0), y + dy, k) } }
+  ring(9, "k")            // stretched tyre
+  ring(8, "C")            // polished lip
+  ring(7, "G")            // dark face
+  for (let i = 0; i < 5; i++) { const a = i * 2 * Math.PI / 5 - 0.6
+    c.line(x, y, x + Math.round(Math.cos(a) * 6), y + Math.round(Math.sin(a) * 6), "H")
+    c.line(x + 1, y, x + 1 + Math.round(Math.cos(a) * 6), y + Math.round(Math.sin(a) * 6), "O") }
+  ring(2, "O"); c.px(x, y, "H")
+  c.px(x - 6, y - 5, "h"); c.px(x - 7, y - 4, "h")   // glint
+}
+sprite("s13", { w: 124, h: 44, outline: "k" },
+  // silhouette: trunk, roof, windshield, long hood, nose
+  poly([1,20, 3,16, 8,15, 27,15, 35,7, 37,6, 66,6, 69,7, 82,15, 112,16, 118,17, 121,19, 121,30, 119,34, 4,34, 1,30], "B"),
+  poly([1,26, 121,26, 121,30, 119,34, 4,34, 1,30], "D"),                // two-tone: charcoal lower body
+  hline(2, 25, 119, "M"),                                              // two-tone seam
+  hline(4, 33, 114, "d"),                                              // sill shadow
+  line(3, 16, 112, 16, "L"), hline(37, 6, 29, "L"),                     // shoulder + roof rail highlights
+  line(4, 18, 112, 18, "S"),                                           // crease shadow
+  // glass
+  poly([30,14, 37,8, 43,8, 43,14], "v"),                               // quarter window
+  poly([46,14, 46,8, 66,8, 77,14], "v"),                               // door glass + windshield edge
+  line(66, 8, 77, 14, "V"), line(68, 8, 79, 15, "S"),                  // A-pillar
+  rect(51, 10, 4, 3, "I"), px(52, 9, "I"),                             // headrest
+  line(70, 11, 72, 13, "I"),                                           // steering wheel
+  line(56, 9, 60, 13, "V"),                                            // glass glint
+  // panels
+  vline(44, 15, 18, "M"), vline(73, 16, 9, "M"),                       // door seams
+  hline(60, 19, 4, "M"),                                               // handle
+  poly([71,12, 75,12, 76,15, 72,15], "B"), px(72, 13, "L"),            // mirror
+  // front
+  hline(100, 20, 21, "h"), hline(100, 21, 21, "S"),                    // thin headlight strip
+  rect(96, 20, 3, 2, "A"),                                             // amber marker
+  hline(104, 23, 17, "d"),                                             // grille slot
+  rect(109, 28, 9, 4, "E"), hline(110, 29, 7, "e"), hline(110, 30, 5, "e"),   // plate
+  hline(98, 35, 22, "k"),                                              // front lip
+  // rear
+  rect(1, 19, 3, 3, "t"),
+  // wheel arches cut into the body, then the wheels set inside them
+  (c) => { for (const [x, y] of [[23, 33], [89, 33]]) for (let dy = -10; dy <= 0; dy++) for (let dx = -10; dx <= 10; dx++)
+      if (dx * dx + dy * dy <= 110) c.px(x + dx, y + dy, "d")
+    wheel(c, 23, 33, false); wheel(c, 89, 33, true) },
+)
+
 pal({
   k: "#0c0f14", B: "#8d97ab", l: "#b9c1d0", L: "#dde2ea", S: "#5f6880", M: "#3f465a", D: "#262b38",
   v: "#151a24", V: "#55627a", g: "#c9ccd4", G: "#2b2e37", O: "#1a1c22", H: "#6c707c",
@@ -8,41 +57,6 @@ pal({
   F: "#17291f", N: "#0a140f", f: "#34594a", w: "#7f9d8d", W: "#0a120e", r: "#13201a",
   T: "#eef3ee", o: "#0a1a12", s: "#9fc4ad", n: "#c9d6cc", x: "#a8c2b4",
 })
-function wheel(c, x, y, rx, ry) {
-  c.ellipse(x, y, rx + 1, ry + 1, "k")            // arch shadow / tyre
-  c.ellipse(x, y, rx, ry, "g")                    // polished lip
-  c.ellipse(x + 1, y, rx - 2, ry - 2, "G")        // dark gunmetal face
-  for (let i = 0; i < 5; i++) { const a = i * 2 * Math.PI / 5 - 0.3
-    c.line(x + 1, y, x + 1 + Math.round(Math.cos(a) * (rx - 3)), y + Math.round(Math.sin(a) * (ry - 3)), "H") }
-  c.px(x + 1, y, "g")
-  c.px(x - rx + 1, y - 2, "E"); c.px(x - rx + 1, y - 1, "E")   // lip glint
-}
-sprite("s13", { w: 122, h: 46, outline: "k" },
-  (c) => { c.ellipse(113, 33, 2, 4, "O"); wheel(c, 22, 34, 6, 7); wheel(c, 72, 37, 7, 8) },  // wheels first: fenders tuck over them
-  poly([2,19, 5,16, 24,15, 28,19], "l"),                      // trunk top
-  poly([2,19, 84,21, 86,35, 4,31], "B"),                      // side
-  poly([84,21, 118,21, 118,28, 86,35], "S"),                  // front face
-  poly([62,17, 94,15, 118,21, 84,21], "l"),                   // hood
-  poly([27,18, 39,10, 60,10, 64,17], "v"),                     // side glass
-  poly([39,10, 46,5, 73,5, 62,10], "L"),                       // roof
-  poly([62,10, 73,5, 94,15, 64,17], "v"),                      // windshield
-  line(72, 8, 82, 13, "V"), line(76, 8, 86, 13, "V"),
-  line(44, 12, 50, 10, "V"),
-  vline(47, 10, 8, "k"),
-  line(2, 19, 84, 21, "L"),
-  recolor({ B: "S" }, [0, 27, 90, 12]),
-  line(4, 28, 85, 32, "M"), line(4, 29, 85, 33, "D"),
-  line(47, 20, 48, 29, "M"), line(65, 20, 66, 31, "M"),
-  hline(53, 23, 3, "M"),
-  poly([62,15, 66,14, 67,17, 63,17], "B"),
-  line(87, 23, 117, 22, "h"), line(87, 24, 117, 23, "M"),
-  px(87, 23, "A"), px(117, 22, "A"),
-  line(89, 26, 116, 25, "D"),
-  poly([90,30, 115,28, 115,30, 91,32], "D"),
-  rect(103, 26, 7, 3, "E"), hline(104, 27, 5, "M"),
-  line(86, 35, 119, 29, "k"),
-  rect(2, 21, 2, 3, "t"),
-)
 
 sprite("_title", { outline: "o" }, `
 .......TTTTTTT..TTTT..TTTTTTT........TTTTTTTTTT...........TTTTTTT.....TTTTTTT.....TTTTTTTTTTTTTTTT.....TTTTTTTTTTTTTTTTTTTTTT.....TTTTTTT..................
@@ -110,10 +124,11 @@ anim("rain", { w: W, h: H, frames: FR, fps: 12 },
     c.dither(0, GROUND - 6, W, 6, ".", "f", 0.25)                  // low fog over the road edge
     c.rect(0, GROUND, W, H - GROUND, "W")                           // wet asphalt
     // reflection of the car, darkened and broken by ripples
-    c.stamp("s13", 78, GROUND - 3, { flip: "y", swap: { L: "B", l: "S", B: "S", S: "M", M: "D", h: "l", E: "S", g: "H", A: "M", t: "D", V: "M" } })
+    c.stamp("s13", 77, GROUND - 3, { flip: "y", swap: { L: "S", B: "S", S: "M", M: "D", D: "d", h: "S", E: "M", C: "H", A: "M", t: "D", I: "M", e: "D" } })
     for (let y = GROUND + 2; y < H; y += 3) for (let x = ((y * 7 + c.frame * 2) % 12) - 12; x < W; x += 12) c.hline(x, y, 7, "r")
-    c.ellipse(140, GROUND + 1, 58, 2, "a")
-    c.stamp("s13", 78, GROUND - 44)
+    c.dither(0, GROUND + 10, W, 4, ".", "W", 0.5); c.rect(0, GROUND + 14, W, H, "W")   // reflection fades out
+    c.ellipse(140, GROUND + 1, 60, 2, "a")
+    c.stamp("s13", 77, GROUND - 44)
     // rain + splashes
     for (const [x0, y0] of drops) { const y = (y0 + c.frame * 5) % H, x = x0 - Math.floor(y / 4)
       c.px(x, y, "w"); c.px(x - 1, y + 3, "w"); if (y < GROUND - 1) c.px(x, y + 1, "w") }
