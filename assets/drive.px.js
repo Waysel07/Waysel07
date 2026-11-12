@@ -1,24 +1,24 @@
-// Waysel profile header: a tuned S13 Silvia cruising through a city at night. Built with pxl.
+// Waysel profile header: a slammed red S13 Silvia cruising through a city at night. Built with pxl.
 pal({
   a: "#0f0b1e", b: "#1b1430", c: "#2b1e3f", d: "#4a2550", e: "#7a2f5a",
   m: "#f6eedc", s: "#c7b8e0", T: "#f4ecd8", k: "#0d0a18",
   F: "#2b2145", N: "#1f1833", w: "#ffcf5c", n: "#ff5c8a", q: "#41f0ff",
   r: "#241c33", R: "#2e2442", u: "#5a4a7a", y: "#e8e0cc", p: "#3a3050", L: "#ffe6a8",
-  B: "#f2f2f6", S: "#b9bccb", v: "#2a3a55", h: "#fff2a8", t: "#ff3b4e",
-  C: "#d8dce6", G: "#2a2a35", H: "#8a8a99", X: "#9a9aa8", z: "#b04dff",
+  B: "#e2242f", S: "#9c1b26", l: "#ff5a5f", E: "#f4f4f4", v: "#2a3a55", h: "#fff2a8", t: "#ff3b4e",
+  C: "#e6e9f0", G: "#7a7d8c", H: "#c8ccd8", X: "#9a9aa8", z: "#b04dff",
   o: "#ff7a3d", Y: "#ffd36b", j: "#ff6f9a", P: "#fff6c8",
 })
 
 sprite("_s13", `
-.kkkkkkkkkk......kkkkkkkkkkk..................
-.kkkkkkkkkk....kkBBBBBBBBBBBkkk...............
-...k....k....kkBvvvvvvkvvvvvvvBkkk............
-.kkkkkkkkkkkkBvvvvvvvvkvvvvvvvvvBBkkkkkkk.....
-kBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBkkk..
+.................kkkkkkkkkkk..................
+...............kkBBBBBBBBBBBkkk...............
+.kk..........kkBvvvvvvkvvvvvvvBkkk............
+kBBkkkkkkkkkkBvvvvvvvvkvvvvvvvvvBBkkkkkkk.....
+kBBBBBBBBBBBBllllllllllllllllllllllllllllkkk..
 kBBBBBBkkkkkBBBBBBBBBBBBBBBBBBBBBkkkkkBBBBhhk.
 kttBBBkCCCCCkBBBBBBBBBBBBBBBBBBBkCCCCCkBBBBBBk
 kSSSSkCGGGGGCkSSSSSSSSSSSSSSSSSkCGGGGGCkSSSSBk
-XXBBBkCGGHGGCkBBBBBBBBBBBBBBBBBkCGGHGGCkBBBBBk
+XXBBBkCGGHGGCkBBBBBBBBBBBBBBBBBkCGGHGGCkEEBBBk
 ..kkSkCGGGGGCkSSSSSSSSSSSSSSSSSkCGGGGGCkSSSkk.
 ....kkkCCCCCkkkkkkkkkkkkkkkkkkkkkCCCCCkkkkkkkk
 .......kkkkk.....................kkkkk........
@@ -99,7 +99,6 @@ anim("drive", { w: W, h: H, frames: FR, fps: 16 },
     // headlight beam: tapered, thinning with distance
     for (let d = 0; d < 34; d++) { const half = 1 + Math.floor(d / 7)
       for (let j = -half; j <= half; j++) if (((d + j + 64) % 3 === 0) && d < 34 - Math.abs(j) * 3) c.px(cx + 46 + d, cy + 5 + j, "P") }
-    c.hline(cx + 5, cy + 12, 36, "z")
     c.stamp("_s13", cx, cy)
     for (let i = 0; i < 3; i++) {
       const t = (ph * 2 + i / 3) % 1
@@ -112,7 +111,7 @@ anim("drive", { w: W, h: H, frames: FR, fps: 16 },
   stamp("_sub2", 7, 35, { swap: { T: "k" } }), stamp("_sub2", 6, 34),
   glow("w", { r: 2, strength: 0.35, bands: 2 }),
   glow("nqL", { r: 4, strength: 0.6, bands: 3 }),
-  glow("ht", { r: 5, strength: 0.7, bands: 3 }),
-  glow("z", { r: 2, strength: 0.45, bands: 2 }),
+  glow("h", { r: 5, strength: 0.7, bands: 3 }),
+  glow("t", { r: 2, strength: 0.5, bands: 2 }),
   glow("m", { r: 7, strength: 0.35, bands: 3 }),
 )

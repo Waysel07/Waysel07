@@ -1,4 +1,4 @@
-<img alt="Waysel: cars, music and small odd projects. A tuned white S13 Silvia with a GT wing and purple underglow cruises through a city at night while music notes float out and an equalizer bounces." src="assets/drive.gif" width="100%">
+<img alt="Waysel: cars, music and small odd projects. A slammed red S13 Silvia on polished deep-dish wheels cruises through a city at night while music notes float out and an equalizer bounces." src="assets/drive.gif" width="100%">
 
 Hi, I'm Waysel from Germany 🇩🇪. I'm into 🚗 cars and 🎧 music, and I make small, odd things.
 
