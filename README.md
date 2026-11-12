@@ -1,9 +1,9 @@
-<a href="https://www.fisch.ing"><picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/title-dark.svg">
-  <img alt="Waysel: pixel fishing games, terminal toys and cyberpunk UIs. Press start to play Fischen! on fisch.ing" src="assets/title-light.svg" width="100%">
-</picture></a>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/drive-dark.svg">
+  <img alt="Waysel: cars, music and small odd projects. A pixel car cruises past a city skyline while music notes float out and an equalizer bounces." src="assets/drive-light.svg" width="100%">
+</picture>
 
-Hi, I'm Waysel from Germany 🇩🇪. I make small, odd things.
+Hi, I'm Waysel from Germany 🇩🇪. I'm into 🚗 cars and 🎧 music, and I make small, odd things.
 
 - 🎣 **[Fischen!](https://www.fisch.ing)**: a pixel-art fishing game in your browser
 - 🐟 **[fishfetch](https://github.com/Waysel07/fishfetch)**: fastfetch, but the logo is a swimming fish

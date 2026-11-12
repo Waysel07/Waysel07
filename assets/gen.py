@@ -384,7 +384,118 @@ ENTRIES = [
      "Fischdex No. 004, Terminal Glass Glow: a glass theme with soft text glow for Windows Terminal. HLSL shader."),
 ]
 
+# ---------------------------------------------------------------- drive scene
+CAR = [  # side view, facing right
+    "..........KKKKKKKKKKK...........",
+    "........KKBBBBBBBBBBBKK.........",
+    ".......KBBWWWWWKBWWWWWBK........",
+    "......KBBWWWWWWKBWWWWWWBKKKKKK..",
+    ".KKKKKBBBBBBBBBBBBBBBBBBBBBBBBK.",
+    "KBBBBBBBBBBBBBBBBBBBBBBBBBBBBBYK",
+    "KLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLK",
+    "KRBBBBKKKKKBBBBBBBBBBBKKKKKBBBBK",
+    "KKKKKKKGGGKKKKKKKKKKKKKGGGKKKKKK",
+    "......KGHGK...........KGHGK.....",
+    ".......KKK.............KKK......",
+]
+NOTE = ["..XX", "..XX", "..X.", "..X.", "XXX.", "XXX."]
+DRIVE = {
+    "dark": dict(sky=["#1b1430", "#2b1e3f", "#4a2550", "#7a2f5a", "#b8445a", "#e8604a"], moon="#f4ecd8",
+                 city="#2b1e3f", city2="#3a2a55", win="#ffd36b", road="#231b33", road2="#2e2442", dash="#f4ecd8",
+                 curb="#6b5a9a", title="#f4ecd8", title_sh="#1b1430", sub="#ffe6c4", eq=["#ff7a3d", "#ffd36b", "#ff5c8a"],
+                 note="#ffd36b", stars=True),
+    "light": dict(sky=["#6ec3f0", "#7fcbf2", "#93d4f4", "#a8ddf6", "#bfe6f8", "#d6eff9"], moon="#fff2a8",
+                  city="#8fa8c8", city2="#a9bdd8", win="#e6f2fb", road="#4a4458", road2="#5a5468", dash="#f4ecd8",
+                  curb="#b8a98a", title="#1b1430", title_sh="#ffffff", sub="#1b1430", eq=["#c4541a", "#155f80", "#e0306a"],
+                  note="#1b1430", stars=False),
+}
+CAR_C = {"K": "#1b1430", "B": "#e8434f", "L": "#b32d3a", "W": "#9fd8f0", "Y": "#ffd36b", "R": "#ff3b4e",
+         "G": "#3a3a48", "H": "#c7c7d4"}
+
+DRIVE_STYLE = """<style>
+.road{animation:road .5s steps(4) infinite}
+@keyframes road{to{transform:translateX(-64px)}}
+.city{animation:city 8s steps(64) infinite}
+@keyframes city{to{transform:translateX(-256px)}}
+.car{animation:car .4s steps(1) infinite}
+@keyframes car{50%{transform:translateY(-4px)}}
+.eq rect{transform-box:fill-box;transform-origin:bottom;animation:eq 1.2s steps(1) infinite}
+@keyframes eq{0%{transform:scaleY(1)}25%{transform:scaleY(.4)}50%{transform:scaleY(.75)}75%{transform:scaleY(.25)}}
+.n{opacity:0;animation:n 3s steps(12) infinite}
+@keyframes n{0%{opacity:0;transform:translate(0,0)}10%{opacity:1}100%{opacity:0;transform:translate(-48px,-96px)}}
+.tw{animation:tw 3s steps(1) infinite}
+@keyframes tw{0%,60%{opacity:1}61%,80%{opacity:.25}}
+@media (prefers-reduced-motion:reduce){.road,.city,.car,.eq rect,.n,.tw{animation:none}.n{opacity:1}}
+</style>"""
+
+
+def drive(theme):
+    t = DRIVE[theme]
+    W, H, P = 1200, 500, 4
+    HZ = 330
+    b = []
+    bands = t["sky"]
+    bh = HZ // len(bands)
+    for i, col in enumerate(bands):
+        b.append(rect(0, i * bh, W, bh + 1, col))
+    for i in range(1, len(bands)):
+        y0 = i * bh - 2 * P
+        cells = "".join(f"M{x} {y0 + r*P}h{P}v{P}h-{P}z" for r in range(2) for x in range((r % 2) * P, W, 2 * P))
+        b.append(f'<path d="{cells}" fill="{bands[i]}"/>')
+    if t["stars"]:
+        for i, (x, y) in enumerate([(120, 28), (300, 16), (520, 40), (660, 20), (760, 52), (430, 76), (980, 24)]):
+            b.append(rect(x, y, P, P, "#f4ecd8", f' class="tw" style="animation-delay:-{i*0.7}s"'))
+    # moon / sun, small, upper middle
+    mx, my, mr = 740, 84, 28
+    disc = [(x // P, y // P) for y in range(my - mr, my + mr, P) for x in range(mx - mr, mx + mr, P)
+            if (x + 2 - mx) ** 2 + (y + 2 - my) ** 2 <= mr * mr]
+    b.append(f'<path d="{path_d(disc, P)}" fill="{t["moon"]}"/>')
+    # skyline: two layers of blocks, scrolling slowly (tile 256px wide, drawn 2 tiles past the edge)
+    import random
+    rnd = random.Random(7)
+    far, near, wins = [], [], []
+    for x in range(0, W + 512, 32):
+        h = rnd.choice([48, 64, 80, 96, 112, 72])
+        far.append(f"M{x} {HZ-h-24}h32v{h+24}h-32z")
+    for x in range(0, W + 512, 48):
+        h = rnd.choice([40, 56, 72, 88, 64])
+        near.append(f"M{x} {HZ-h}h{40}v{h}h-40z")
+        for wy in range(HZ - h + 12, HZ - 8, 16):
+            for wx in (x + 8, x + 24):
+                if rnd.random() < 0.45:
+                    wins.append(f"M{wx} {wy}h{2*P}v{2*P}h-{2*P}z")
+    b.append(f'<g class="city"><path d="{"".join(far)}" fill="{t["city2"]}"/><path d="{"".join(near)}" fill="{t["city"]}"/>'
+             f'<path d="{"".join(wins)}" fill="{t["win"]}"/></g>')
+    # road
+    b.append(rect(0, HZ, W, H - HZ, t["road"]))
+    b.append(rect(0, HZ, W, 2 * P, t["curb"]))
+    b.append(rect(0, H - 6 * P, W, 6 * P, t["road2"]))
+    dashes = "".join(f"M{x} {HZ+130}h{8*P}v{2*P}h-{8*P}z" for x in range(0, W + 128, 64))
+    b.append(f'<path class="road" d="{dashes}" fill="{t["dash"]}" opacity=".8"/>')
+    # car + music notes from the window
+    cx, cy, cs = 420, HZ + 14, 10
+    b.append(f'<g class="car">{sprite(CAR, CAR_C, cs, cx, cy)}</g>')
+    for i, (dx, dl) in enumerate([(14, 0), (20, 1), (10, 2)]):
+        b.append(f'<g class="n" style="animation-delay:-{dl}s">{sprite(NOTE, {"X": t["note"]}, P, cx + dx * cs, cy - 8 * P)}</g>')
+    # equalizer, top right
+    ex, ey, bw = 860, 176, 20
+    heights = [44, 84, 64, 108, 76, 96, 52, 88, 70, 40]
+    bars = []
+    for i, hgt in enumerate(heights):
+        col = t["eq"][i % 3]
+        delay = (i * 0.37) % 1.2
+        bars.append(f'<rect x="{ex + i*(bw+P)}" y="{ey-hgt}" width="{bw}" height="{hgt}" fill="{col}" style="animation-delay:-{delay:.2f}s"/>')
+    b.append(f'<g class="eq">{"".join(bars)}</g>')
+    # lettering
+    b.append(text("WAYSEL", 64, 48, 8, t["title"], t["title_sh"]))
+    b.append(text("CARS, MUSIC AND", 68, 140, 4, t["sub"]))
+    b.append(text("SMALL ODD PROJECTS.", 68, 184, 4, t["sub"]))
+    label = "Waysel: cars, music and small odd projects. A pixel car cruises past a city skyline while music notes float out and an equalizer bounces."
+    return (f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" '
+            f'shape-rendering="crispEdges" role="img" aria-label="{label}">{DRIVE_STYLE}{"".join(b)}</svg>')
+
+
 if __name__ == "__main__":
     for name, t in THEMES.items():
-        (OUT / f"title-{name}.svg").write_text(header(t))
+        (OUT / f"drive-{name}.svg").write_text(drive(name))
     print("ok")
