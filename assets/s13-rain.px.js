@@ -119,14 +119,14 @@ sprite("_title", { outline: "o" }, `
 ...........................................................................................................................................................
 `)
 sprite("_sub", `
-..ssss....sss...ssssss...sssss..................ss...ss.ss...ss..sssss...ssssss...ssss...........sss.............sssss..ss...ss...sss....ss......ss..............sssss..sssss...sssss...........ssssss..ssssss...sssss.......ss.sssssss...ssss...ssssss..sssss..
-.ss..ss..ss.ss..ss...ss.ss...ss.................sss.sss.ss...ss.ss...ss....ss....ss..ss.........ss.ss...........ss...ss.sss.sss..ss.ss...ss......ss.............ss...ss.ss..ss..ss..ss..........ss...ss.ss...ss.ss...ss......ss.ss.......ss..ss....ss...ss...ss.
-ss......ss...ss.ss...ss.ss......................sssssss.ss...ss.ss.........ss...ss..............ss.ss...........ss......sssssss.ss...ss..ss......ss.............ss...ss.ss...ss.ss...ss.........ss...ss.ss...ss.ss...ss......ss.ss......ss.........ss...ss......
-ss......ss...ss.ss..sss..sssss..................ss.s.ss.ss...ss..sssss.....ss...ss...............sss.............sssss..ss.s.ss.ss...ss..ss......ss.............ss...ss.ss...ss.ss...ss.........ss...ss.ss..sss.ss...ss......ss.ssssss..ss.........ss....sssss..
-ss......sssssss.sssss........ss.................ss.s.ss.ss...ss......ss....ss...ss..............ss.ss.s..............ss.ss.s.ss.sssssss..ss......ss.............ss...ss.ss...ss.ss...ss.........ssssss..sssss...ss...ss......ss.ss......ss.........ss........ss.
-.ss..ss.ss...ss.ss.sss..ss...ss...ss............ss...ss.ss...ss.ss...ss....ss....ss..ss.........ss..ss..........ss...ss.ss...ss.ss...ss..ss......ss.............ss...ss.ss..ss..ss..ss..........ss......ss.sss..ss...ss.ss...ss.ss.......ss..ss....ss...ss...ss.
-..ssss..ss...ss.ss..sss..sssss....ss............ss...ss..sssss...sssss...ssssss...ssss...........ssssss..........sssss..ss...ss.ss...ss..ssssss..ssssss..........sssss..sssss...sssss...........ss......ss..sss..sssss...sssss..sssssss...ssss.....ss....sssss..
-.................................ss.............................................................................................................................................................................................................................
+..sss...ssssss..ssssss..ssssss..sssssss.ss...ss..ssssss..ssssss...ssss..sssssss.........sssss...sssssss.ss...ss...................ssss....sss...ssssss...sssss...........sss............ss...ss.ss...ss..sssss...ssssss...ssss..
+.ss.ss..ss...ss.ss...ss.ss...ss.ss......sss..ss....ss......ss....ss..ss.ss..............ss..ss..ss......ss...ss..................ss..ss..ss.ss..ss...ss.ss...ss.........ss.ss...........sss.sss.ss...ss.ss...ss....ss....ss..ss.
+ss...ss.ss...ss.ss...ss.ss...ss.ss......ssss.ss....ss......ss...ss......ss..............ss...ss.ss......ss...ss.................ss......ss...ss.ss...ss.ss..............ss.ss...........sssssss.ss...ss.ss.........ss...ss......
+ss...ss.ss...ss.ss...ss.ss..sss.ssssss..ss.ssss....ss......ss...ss......ssssss..........ss...ss.ssssss..sss.sss.................ss......ss...ss.ss..sss..sssss...........sss............ss.s.ss.ss...ss..sssss.....ss...ss......
+sssssss.ssssss..ssssss..sssss...ss......ss..sss....ss......ss...ss......ss..............ss...ss.ss.......sssss..................ss......sssssss.sssss........ss.........ss.ss.s.........ss.s.ss.ss...ss......ss....ss...ss......
+ss...ss.ss......ss......ss.sss..ss......ss...ss....ss......ss....ss..ss.ss..............ss..ss..ss........sss.....ss.............ss..ss.ss...ss.ss.sss..ss...ss.........ss..ss..........ss...ss.ss...ss.ss...ss....ss....ss..ss.
+ss...ss.ss......ss......ss..sss.sssssss.ss...ss....ss....ssssss...ssss..sssssss.........sssss...sssssss....s......ss..............ssss..ss...ss.ss..sss..sssss...........ssssss.........ss...ss..sssss...sssss...ssssss...ssss..
+.................................................................................................................ss.............................................................................................................
 `)
 sprite("_label", `
 nn...nn..nnnnnn..nnnnn...nnnnn....nnn...nn...nn..........nnnnn...nnnnnn..nn.....nn...nn..nnnnnn...nnn............nnnnn.....nn....nnnnnn.
@@ -170,6 +170,6 @@ anim("rain", { w: W, h: H, frames: FR, fps: 12 },
       if (p === 0) c.px(sx, sy, "x"); if (p === 1) { c.px(sx - 1, sy, "x"); c.px(sx + 1, sy, "x") } }
   },
   stamp("_title", 62, 6),
-  stamp("_sub", 12, 34),
+  stamp("_sub", 28, 34),
   stamp("_label", 72, 108),
 )
