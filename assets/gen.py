@@ -385,18 +385,20 @@ ENTRIES = [
 ]
 
 # ---------------------------------------------------------------- drive scene
-CAR = [  # side view, facing right
-    "..........KKKKKKKKKKK...........",
-    "........KKBBBBBBBBBBBKK.........",
-    ".......KBBWWWWWKBWWWWWBK........",
-    "......KBBWWWWWWKBWWWWWWBKKKKKK..",
-    ".KKKKKBBBBBBBBBBBBBBBBBBBBBBBBK.",
-    "KBBBBBBBBBBBBBBBBBBBBBBBBBBBBBYK",
-    "KLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLK",
-    "KRBBBBKKKKKBBBBBBBBBBBKKKKKBBBBK",
-    "KKKKKKKGGGKKKKKKKKKKKKKGGGKKKKKK",
-    "......KGHGK...........KGHGK.....",
-    ".......KKK.............KKK......",
+CAR = [  # tuned Nissan S13 Silvia, side view facing right: GT wing, dropped, deep-dish wheels, front lip
+    ".DDDDDDDDDD......KKKKKKKKKKK..................",
+    ".DDDDDDDDDD....KKBBBBBBBBBBBKKK...............",
+    "...D....D....KKBWWWWWWKWWWWWWWBKKK............",
+    ".KKDKKKKDKKKKBWWWWWWWWKWWWWWWWWWBBKKKKKKK.....",
+    "KBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBKKK..",
+    "KBBBBBBKKKKKBBBBBBBBBBBBBBBBBBBBBKKKKKBBBBYYK.",
+    "KRRBBBKCCCCCKBBBBBBBBBBBBBBBBBBBKCCCCCKBBBBBBK",
+    "KSSSSKCGGGGGCKSSSSSSSSSSSSSSSSSKCGGGGGCKSSSSBK",
+    "XXBBBKCGGHGGCKBBBBBBBBBBBBBBBBBKCGGHGGCKBBBBBK",
+    "..KKSKCGGGGGCKSSSSSSSSSSSSSSSSSKCGGGGGCKSSSKK.",
+    "....KKKCCCCCKKKKKKKKKKKKKKKKKKKKKCCCCCKDDDDDDD",
+    ".......KKKKK.....................KKKKK........",
+    "..............................................",
 ]
 NOTE = ["..XX", "..XX", "..X.", "..X.", "XXX.", "XXX."]
 DRIVE = {
@@ -409,8 +411,8 @@ DRIVE = {
                   curb="#b8a98a", title="#1b1430", title_sh="#ffffff", sub="#1b1430", eq=["#c4541a", "#155f80", "#e0306a"],
                   note="#1b1430", stars=False),
 }
-CAR_C = {"K": "#1b1430", "B": "#e8434f", "L": "#b32d3a", "W": "#9fd8f0", "Y": "#ffd36b", "R": "#ff3b4e",
-         "G": "#3a3a48", "H": "#c7c7d4"}
+CAR_C = {"K": "#1b1430", "D": "#1b1430", "B": "#f2f2f6", "S": "#b9bccb", "W": "#2a3a55", "Y": "#fff2a8",
+         "R": "#ff3b4e", "C": "#d8dce6", "G": "#2a2a35", "H": "#8a8a99", "X": "#9a9aa8"}
 
 DRIVE_STYLE = """<style>
 .road{animation:road .5s steps(4) infinite}
@@ -473,9 +475,9 @@ def drive(theme):
     dashes = "".join(f"M{x} {HZ+130}h{8*P}v{2*P}h-{8*P}z" for x in range(0, W + 128, 64))
     b.append(f'<path class="road" d="{dashes}" fill="{t["dash"]}" opacity=".8"/>')
     # car + music notes from the window
-    cx, cy, cs = 420, HZ + 14, 10
+    cx, cy, cs = 400, HZ + 14, 8
     b.append(f'<g class="car">{sprite(CAR, CAR_C, cs, cx, cy)}</g>')
-    for i, (dx, dl) in enumerate([(14, 0), (20, 1), (10, 2)]):
+    for i, (dx, dl) in enumerate([(18, 0), (24, 1), (14, 2)]):
         b.append(f'<g class="n" style="animation-delay:-{dl}s">{sprite(NOTE, {"X": t["note"]}, P, cx + dx * cs, cy - 8 * P)}</g>')
     # equalizer, top right
     ex, ey, bw = 860, 176, 20
@@ -490,7 +492,7 @@ def drive(theme):
     b.append(text("WAYSEL", 64, 48, 8, t["title"], t["title_sh"]))
     b.append(text("CARS, MUSIC AND", 68, 140, 4, t["sub"]))
     b.append(text("SMALL ODD PROJECTS.", 68, 184, 4, t["sub"]))
-    label = "Waysel: cars, music and small odd projects. A pixel car cruises past a city skyline while music notes float out and an equalizer bounces."
+    label = "Waysel: cars, music and small odd projects. A tuned S13 Silvia cruises past a city skyline while music notes float out and an equalizer bounces."
     return (f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" '
             f'shape-rendering="crispEdges" role="img" aria-label="{label}">{DRIVE_STYLE}{"".join(b)}</svg>')
 

@@ -1,6 +1,6 @@
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/drive-dark.svg">
-  <img alt="Waysel: cars, music and small odd projects. A pixel car cruises past a city skyline while music notes float out and an equalizer bounces." src="assets/drive-light.svg" width="100%">
+  <img alt="Waysel: cars, music and small odd projects. A tuned S13 Silvia cruises past a city skyline while music notes float out and an equalizer bounces." src="assets/drive-light.svg" width="100%">
 </picture>
 
 Hi, I'm Waysel from Germany 🇩🇪. I'm into 🚗 cars and 🎧 music, and I make small, odd things.
