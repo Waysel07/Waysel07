@@ -387,7 +387,4 @@ ENTRIES = [
 if __name__ == "__main__":
     for name, t in THEMES.items():
         (OUT / f"title-{name}.svg").write_text(header(t))
-        (OUT / f"dex-fischen-{name}.svg").write_text(feature(t))
-        for key, no, nm, rows, spr, cmap, label in ENTRIES:
-            (OUT / f"dex-{key}-{name}.svg").write_text(entry(t, no, nm, rows, spr, cmap, label))
     print("ok")
