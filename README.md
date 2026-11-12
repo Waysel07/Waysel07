@@ -1,7 +1,5 @@
 <img alt="Waysel: apprentice developer, cars and music. A slammed silver Nissan Silvia S13 parked on a wet road in a misty pine forest, in the rain." src="assets/s13-rain-v7.gif" width="100%">
 
-<sub>S13 pixel art by GEDENC ART.</sub>
-
 Hi, I'm Waysel 👋 I'm an apprentice software developer from Germany 🇩🇪.
 When I'm not coding, I'm into 🚗 cars and 🎧 music.
 
