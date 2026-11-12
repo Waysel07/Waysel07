@@ -1,4 +1,4 @@
-<img alt="Waysel: cars, music and small odd projects. A slammed silver Nissan Silvia S13 parked on a wet road in a misty pine forest, in the rain." src="assets/s13-rain-v4.gif" width="100%">
+<img alt="Waysel: cars, music and small odd projects. A slammed silver Nissan Silvia S13 parked on a wet road in a misty pine forest, in the rain." src="assets/s13-rain-v5.gif" width="100%">
 
 <sub>S13 pixel art by GEDENC ART.</sub>
 
