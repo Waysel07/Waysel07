@@ -1,53 +1,77 @@
-// Waysel profile header: a slammed two-tone S13 parked on a wet road in a misty pine forest, in the rain.
-pal({
-  k: "#0b0d11", L: "#e8ecf2", B: "#b9c1ce", S: "#8b94a6", M: "#636b7d", D: "#2e3139", d: "#1e2027",
-  v: "#121519", V: "#3a414f", I: "#a3a9b4", C: "#dde1e8", G: "#363840", O: "#202228", H: "#60636c",
-  h: "#f2f4f6", A: "#ef8a2b", E: "#f2f3ee", e: "#4f8a5e", t: "#c8343c",
-})
-function wheel(c, x, y, tilt) {
-  const ring = (r, k) => { for (let dy = -r; dy <= r; dy++) for (let dx = -r; dx <= r; dx++) {
-    const d = dx * dx + dy * dy; if (d <= r * r + r) c.px(x + dx + (tilt && dy < -2 ? -1 : 0), y + dy, k) } }
-  ring(9, "k")            // stretched tyre
-  ring(8, "C")            // polished lip
-  ring(7, "G")            // dark face
-  for (let i = 0; i < 5; i++) { const a = i * 2 * Math.PI / 5 - 0.6
-    c.line(x, y, x + Math.round(Math.cos(a) * 6), y + Math.round(Math.sin(a) * 6), "H")
-    c.line(x + 1, y, x + 1 + Math.round(Math.cos(a) * 6), y + Math.round(Math.sin(a) * 6), "O") }
-  ring(2, "O"); c.px(x, y, "H")
-  c.px(x - 6, y - 5, "h"); c.px(x - 7, y - 4, "h")   // glint
-}
-sprite("s13", { w: 124, h: 44, outline: "k" },
-  // silhouette: trunk, roof, windshield, long hood, nose
-  poly([1,20, 3,16, 8,15, 27,15, 35,7, 37,6, 66,6, 69,7, 82,15, 112,16, 118,17, 121,19, 121,30, 119,34, 4,34, 1,30], "B"),
-  poly([1,26, 121,26, 121,30, 119,34, 4,34, 1,30], "D"),                // two-tone: charcoal lower body
-  hline(2, 25, 119, "M"),                                              // two-tone seam
-  hline(4, 33, 114, "d"),                                              // sill shadow
-  line(3, 16, 112, 16, "L"), hline(37, 6, 29, "L"),                     // shoulder + roof rail highlights
-  line(4, 18, 112, 18, "S"),                                           // crease shadow
-  // glass
-  poly([30,14, 37,8, 43,8, 43,14], "v"),                               // quarter window
-  poly([46,14, 46,8, 66,8, 77,14], "v"),                               // door glass + windshield edge
-  line(66, 8, 77, 14, "V"), line(68, 8, 79, 15, "S"),                  // A-pillar
-  rect(51, 10, 4, 3, "I"), px(52, 9, "I"),                             // headrest
-  line(70, 11, 72, 13, "I"),                                           // steering wheel
-  line(56, 9, 60, 13, "V"),                                            // glass glint
-  // panels
-  vline(44, 15, 18, "M"), vline(73, 16, 9, "M"),                       // door seams
-  hline(60, 19, 4, "M"),                                               // handle
-  poly([71,12, 75,12, 76,15, 72,15], "B"), px(72, 13, "L"),            // mirror
-  // front
-  hline(100, 20, 21, "h"), hline(100, 21, 21, "S"),                    // thin headlight strip
-  rect(96, 20, 3, 2, "A"),                                             // amber marker
-  hline(104, 23, 17, "d"),                                             // grille slot
-  rect(109, 28, 9, 4, "E"), hline(110, 29, 7, "e"), hline(110, 30, 5, "e"),   // plate
-  hline(98, 35, 22, "k"),                                              // front lip
-  // rear
-  rect(1, 19, 3, 3, "t"),
-  // wheel arches cut into the body, then the wheels set inside them
-  (c) => { for (const [x, y] of [[23, 33], [89, 33]]) for (let dy = -10; dy <= 0; dy++) for (let dx = -10; dx <= 10; dx++)
-      if (dx * dx + dy * dy <= 110) c.px(x + dx, y + dy, "d")
-    wheel(c, 23, 33, false); wheel(c, 89, 33, true) },
-)
+// Waysel profile header: a slammed S13 parked on a wet road in a misty pine forest, in the rain.
+// Car art by GEDENC ART (used with credit), cut out and placed in this scene.
+pal({ "0": "#b5c2c6", "1": "#a3b1b9", "2": "#9ca6ac", "3": "#8c9ca5", "4": "#8b95a1", "5": "#84949f", "6": "#7f8486", "7": "#74808b", "8": "#717a88", "9": "#6f7377", "a": "#606a72", "b": "#585d5e", "c": "#4c4e50", "d": "#354040", "e": "#35383a", "f": "#2c2f31", "g": "#28282b", "h": "#252729", "i": "#202627", "j": "#1d2223", "k": "#0f1011", "l": "#000000" })
+sprite("s13", `
+..............................j32111111111121111112221111111111112f..............................................
+............................133111111111111000bbbbbbbbbbbbbbbbbbbcdd.............................................
+..........................118ddddddddcddcdd60chihhhhhhfbbbbbb966666666...........................................
+.........................45cbbddd6666666666b4agiihghhhijigcccbcca9996666.........................................
+........................7bb69dej66666699999a71bjjhhhhhijjhhhjfddccaa99666........................................
+......................16b669ceej999666669996c21fjhhhhhjjihhgjjjjeedcba96669......................................
+.....................18cabbbcegdbbbaaaaaaaabcb19gghhhhjiihhhijjjjjjffdbb9669b....................................
+....................39cbbcccegjbcbbbbbbbbbbbce33bghhhijhhhhhjjjjjjjjjiiiba6699d..................................
+...................4afgfhiiffhjfghfffffffgffffc49hhhhhjhhhhhijjjjjjjjjjjifba669d.................................
+.................349jijjjjjigiijjihhhhhhfhfffhje5agihhhhhhhhhjjjjjjjjjjjjjiec989cc...............................
+................549ihjjjjjjjjjijjihhhhid54222cihd4cihhhhhhhhhifejefififfehifeec9663..............................
+...............459jhgiijjjjjjjijjihhhhh8643441ghe7afihhhhhhhhic9da8c9bb6bdcaa6cgba64.............................
+..d877777777a7755fiiijjiiiijjjijiiiiiiicaaaaa9gijd8bfhiiiihiiijcchbcdcgbjhedecbhhfbbd............................
+fba20000000033433899999999a9999999999999988889999a6389999999aaaaaaa9666999866666666675203........................
+9653333321111111111111123373333333333333333333333553333333111122221222111112221000100001122221000................
+7553577733311111113333335573555555555553444455555754544445332111111111333111113333111111111111000000003ddddff....
+654577555343333333343334475444444444444333333333574433344441111111333311132111111242111111111111001100000adffd...
+9777a7375548777544444453474344444444444444333334574443444476664333443433322332111111111111111111111110100012ifff.
+9a88a878748003jb334333577a77777777777777773333335733434560004jb74333333353211331111111111111111111111111110005dd.
+fc888aa9700jha6jb54588888a88888888888888888888889a8888820djh94kla8888888999a99854454445345557775766666657534449d.
+db9888860beegj99jb7888888a88888888888888888888888a888724eefgj96jka88888abb9bcc99264244422bjjjjjjjjjjjjjji922433a.
+b98888806eegkkj6ck8888888a88888888888888888888888a88860fefkjhj6clkb888899bb9abc9cbaa6b9a9bhjjhjhhhggghhjhbab6a9ad
+a9999a51aeejlkgc9jca9aa99ba99aa878888888888888888a88814eejlkfkc9jlj888888abbbbabccbbbcbbbbdddddddedddeeedbbbbbbbb
+baaaaa31ccfkkgek2gkaaaaaabaaaaaaaaaaaaaaaaaaaaaaaaaaa0bceklhdkl4elkc888888a98877777777777777777777567556555555557
+baaaa939bbhfhdcj2gkfaaaaabbaaaaaaaaaaaaaaaaaaaaabbaa34abdfjdcgh2ellhaaaaaabaaa9a973656deefffeeeb100000009eeec5438
+ggfffb3aaeeceegf2glkgggffigffffffffffffffffffggghhgg29acfceegfc2fllkjggffgiffgggebcccbjkkjjjkkkd11756531bkkjicbbc
+eeeeeb299fjecifc2glkdddeeefeeeeeeeeeeeeeeeeeeeeeefee269cjecifcf2fllljddddefdddedeffffffffffffffc10000031afgffffff
+gffffb266flkdfdd4jlkeeeffgiggggggggggggggggggggfghgh266bkldfdef6jllljeedeefeeeeeeeeeeeeeeeeeeeeb102220329eeeeeeed
+.ggggb266ekhbdd4fllkhfggghjihhhiiiiiiiiiiiiihhhhjigg266bkjbcec4fllllkhgffggfffgiiihiihjjkkkkkkkg86666666dkkjijjhd
+.hiihd426ejbdhc9illlkfgggggjjiiiiiiiiiiiiiiihhhihjig916bjcchfb6jllllljfffgggffgiihhhhhjkkkkkkkkkkkkkkkkkkjjjjkkec
+...ghg9029fejk9dllllkffffgggijjjjjjjjjjjjjjjjjjjjjihg024dejlk9clllllljgfffggffgiihhhhihkkkkkkkjkkkkkkkkkjjjjkkg..
+.....hd201fklc6jkk..................................fb01bkklc6jkk................................................
+......ff101g02ikk....................................k901ge02fkk.................................................
+`)
+pal({ "0": "#566160", "1": "#4e595a", "2": "#4b5455", "3": "#445051", "4": "#444c50", "5": "#404c4f", "6": "#3e4544", "7": "#394346", "8": "#384044", "9": "#373d3d", "a": "#30393b", "b": "#2d3332", "c": "#272d2b", "d": "#1d2624", "e": "#1d2321", "f": "#191f1d", "g": "#171b1b", "h": "#161b1a", "i": "#131b19", "j": "#121917", "k": "#0c110f", "l": "#050907" })
+sprite("s13_reflection", { flip: "y" }, `
+..............................j32111111111121111112221111111111112f..............................................
+............................133111111111111000bbbbbbbbbbbbbbbbbbbcdd.............................................
+..........................118ddddddddcddcdd60chihhhhhhfbbbbbb966666666...........................................
+.........................45cbbddd6666666666b4agiihghhhijigcccbcca9996666.........................................
+........................7bb69dej66666699999a71bjjhhhhhijjhhhjfddccaa99666........................................
+......................16b669ceej999666669996c21fjhhhhhjjihhgjjjjeedcba96669......................................
+.....................18cabbbcegdbbbaaaaaaaabcb19gghhhhjiihhhijjjjjjffdbb9669b....................................
+....................39cbbcccegjbcbbbbbbbbbbbce33bghhhijhhhhhjjjjjjjjjiiiba6699d..................................
+...................4afgfhiiffhjfghfffffffgffffc49hhhhhjhhhhhijjjjjjjjjjjifba669d.................................
+.................349jijjjjjigiijjihhhhhhfhfffhje5agihhhhhhhhhjjjjjjjjjjjjjiec989cc...............................
+................549ihjjjjjjjjjijjihhhhid54222cihd4cihhhhhhhhhifejefififfehifeec9663..............................
+...............459jhgiijjjjjjjijjihhhhh8643441ghe7afihhhhhhhhic9da8c9bb6bdcaa6cgba64.............................
+..d877777777a7755fiiijjiiiijjjijiiiiiiicaaaaa9gijd8bfhiiiihiiijcchbcdcgbjhedecbhhfbbd............................
+fba20000000033433899999999a9999999999999988889999a6389999999aaaaaaa9666999866666666675203........................
+9653333321111111111111123373333333333333333333333553333333111122221222111112221000100001122221000................
+7553577733311111113333335573555555555553444455555754544445332111111111333111113333111111111111000000003ddddff....
+654577555343333333343334475444444444444333333333574433344441111111333311132111111242111111111111001100000adffd...
+9777a7375548777544444453474344444444444444333334574443444476664333443433322332111111111111111111111110100012ifff.
+9a88a878748003jb334333577a77777777777777773333335733434560004jb74333333353211331111111111111111111111111110005dd.
+fc888aa9700jha6jb54588888a88888888888888888888889a8888820djh94kla8888888999a99854454445345557775766666657534449d.
+db9888860beegj99jb7888888a88888888888888888888888a888724eefgj96jka88888abb9bcc99264244422bjjjjjjjjjjjjjji922433a.
+b98888806eegkkj6ck8888888a88888888888888888888888a88860fefkjhj6clkb888899bb9abc9cbaa6b9a9bhjjhjhhhggghhjhbab6a9ad
+a9999a51aeejlkgc9jca9aa99ba99aa878888888888888888a88814eejlkfkc9jlj888888abbbbabccbbbcbbbbdddddddedddeeedbbbbbbbb
+baaaaa31ccfkkgek2gkaaaaaabaaaaaaaaaaaaaaaaaaaaaaaaaaa0bceklhdkl4elkc888888a98877777777777777777777567556555555557
+baaaa939bbhfhdcj2gkfaaaaabbaaaaaaaaaaaaaaaaaaaaabbaa34abdfjdcgh2ellhaaaaaabaaa9a973656deefffeeeb100000009eeec5438
+ggfffb3aaeeceegf2glkgggffigffffffffffffffffffggghhgg29acfceegfc2fllkjggffgiffgggebcccbjkkjjjkkkd11756531bkkjicbbc
+eeeeeb299fjecifc2glkdddeeefeeeeeeeeeeeeeeeeeeeeeefee269cjecifcf2fllljddddefdddedeffffffffffffffc10000031afgffffff
+gffffb266flkdfdd4jlkeeeffgiggggggggggggggggggggfghgh266bkldfdef6jllljeedeefeeeeeeeeeeeeeeeeeeeeb102220329eeeeeeed
+.ggggb266ekhbdd4fllkhfggghjihhhiiiiiiiiiiiiihhhhjigg266bkjbcec4fllllkhgffggfffgiiihiihjjkkkkkkkg86666666dkkjijjhd
+.hiihd426ejbdhc9illlkfgggggjjiiiiiiiiiiiiiiihhhihjig916bjcchfb6jllllljfffgggffgiihhhhhjkkkkkkkkkkkkkkkkkkjjjjkkec
+...ghg9029fejk9dllllkffffgggijjjjjjjjjjjjjjjjjjjjjihg024dejlk9clllllljgfffggffgiihhhhihkkkkkkkjkkkkkkkkkjjjjkkg..
+.....hd201fklc6jkk..................................fb01bkklc6jkk................................................
+......ff101g02ikk....................................k901ge02fkk.................................................
+`)
 
 pal({
   k: "#0c0f14", B: "#8d97ab", l: "#b9c1d0", L: "#dde2ea", S: "#5f6880", M: "#3f465a", D: "#262b38",
@@ -124,11 +148,11 @@ anim("rain", { w: W, h: H, frames: FR, fps: 12 },
     c.dither(0, GROUND - 6, W, 6, ".", "f", 0.25)                  // low fog over the road edge
     c.rect(0, GROUND, W, H - GROUND, "W")                           // wet asphalt
     // reflection of the car, darkened and broken by ripples
-    c.stamp("s13", 77, GROUND - 3, { flip: "y", swap: { L: "S", B: "S", S: "M", M: "D", D: "d", h: "S", E: "M", C: "H", A: "M", t: "D", I: "M", e: "D" } })
+    c.stamp("s13_reflection", 83, GROUND)
     for (let y = GROUND + 2; y < H; y += 3) for (let x = ((y * 7 + c.frame * 2) % 12) - 12; x < W; x += 12) c.hline(x, y, 7, "r")
     c.dither(0, GROUND + 10, W, 4, ".", "W", 0.5); c.rect(0, GROUND + 14, W, H, "W")   // reflection fades out
-    c.ellipse(140, GROUND + 1, 60, 2, "a")
-    c.stamp("s13", 77, GROUND - 44)
+    c.ellipse(139, GROUND, 56, 2, "a")
+    c.stamp("s13", 83, GROUND - 33)
     // rain + splashes
     for (const [x0, y0] of drops) { const y = (y0 + c.frame * 5) % H, x = x0 - Math.floor(y / 4)
       c.px(x, y, "w"); c.px(x - 1, y + 3, "w"); if (y < GROUND - 1) c.px(x, y + 1, "w") }
